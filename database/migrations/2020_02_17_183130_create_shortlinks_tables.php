@@ -44,10 +44,10 @@ class CreateShortlinksTables extends Migration
             $table->string('prefix')->default($this->tablePrefix);
             $table->string('shortlink')->unique()->index();
             $table->text('destination');
-            $table->boolean('click_tracking')->nullable();
+            $table->boolean('track_clicks')->nullable();
             $table->unsignedBigInteger('clicks')->nullable();
-            $table->boolean('ip_tracking')->nullable();
-            $table->boolean('agent_tracking')->nullable();
+            $table->boolean('track_ip')->nullable();
+            $table->boolean('track_agent')->nullable();
             $table->timestamps();
         });
 

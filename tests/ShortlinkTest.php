@@ -18,6 +18,7 @@ class ShortlinkTest extends TestCase
         ]);
     }
 
+    /** @test */
     public function it_can_be_created_from_url()
     {
         $shortlink = Shortlinks::url('google.co.uk')->generate();

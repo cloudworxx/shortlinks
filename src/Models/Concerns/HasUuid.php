@@ -13,4 +13,14 @@ trait HasUuid
             $model->{$model->getKeyName()} = (string) Str::uuid();
         });
     }
+
+    public function incrementing()
+    {
+        return false;
+    }
+
+    public function getKeyType()
+    {
+        return 'string';
+    }
 }

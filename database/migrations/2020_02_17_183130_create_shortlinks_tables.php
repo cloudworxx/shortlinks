@@ -43,6 +43,7 @@ class CreateShortlinksTables extends Migration
             $table->uuid('id')->primary();
             $table->string('prefix')->default($this->tablePrefix);
             $table->string('shortlink')->unique()->index();
+            $table->text('destination');
             $table->boolean('click_tracking')->nullable();
             $table->unsignedBigInteger('clicks')->nullable();
             $table->boolean('ip_tracking')->nullable();

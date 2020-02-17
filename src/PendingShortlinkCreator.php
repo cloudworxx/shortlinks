@@ -21,4 +21,14 @@ class PendingShortlinkCreator
     {
         $this->url = $url;
     }
+
+    /**
+     * Handle the object's destruction.
+     *
+     * @return void
+     */
+    public function __destruct()
+    {
+        
+    }
 }

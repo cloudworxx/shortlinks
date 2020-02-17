@@ -3,6 +3,7 @@
 namespace RyanChandler\Shortlinks\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Shortlink extends Model
@@ -36,6 +37,16 @@ class Shortlink extends Model
 
             $shortlink->shortlink = $shortlinkString;
         });
+    }
+
+    /**
+     * The tracking relationship.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tracking(): HasMany
+    {
+        return $this->hasMany(Tracking::class);
     }
 
     /**

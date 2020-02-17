@@ -16,7 +16,7 @@ class Shortlink extends Model
      * @var array
      */
     protected $fillable = [
-        'click_tracking', 'clicks', 'ip_tracking', 'agent_tracking',
+        'destination', 'click_tracking', 'clicks', 'ip_tracking', 'agent_tracking',
     ];
     
     /**

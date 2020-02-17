@@ -8,40 +8,18 @@ use Illuminate\Support\Facades\Schema;
 class CreateShortlinksTables extends Migration
 {
     /**
-     * The database table prefix.
-     * 
-     * @var string
-     */
-    protected $tablePrefix;
-
-    /**
-     * The link prefix.
-     * 
-     * @var string
-     */
-    protected $linkPrefix;
-
-    /**
-     * Create a new CreateShortlinksTables instance.
-     * 
-     * @return void
-     */
-    public function __construct(Repository $config)
-    {
-        $this->tablePrefix = $config->get('shortlinks.database_table_prefix');
-        $this->tablePrefix = $config->get('shortlinks.url_prefix');
-    }
-
-    /**
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create($this->tablePrefix.'shortlinks', function (Blueprint $table) {
+        $tablePrefix = config('shortlinks.database_table_prefix');
+        $urlPrefix = config('shortlinks.url_prefix');
+
+        Schema::create($tablePrefix.'shortlinks', function (Blueprint $table) use ($urlPrefix) {
             $table->uuid('id')->primary();
-            $table->string('prefix')->default($this->tablePrefix);
+            $table->string('prefix')->default($urlPrefix);
             $table->string('shortlink')->unique()->index();
             $table->text('destination');
             $table->boolean('track_clicks')->nullable();
@@ -51,7 +29,7 @@ class CreateShortlinksTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create($this->tablePrefix.'tracking', function (Blueprint $table) {
+        Schema::create($tablePrefix.'tracking', function (Blueprint $table) use ($tablePrefix) {
             $table->uuid('id')->primary();
             $table->uuid('shortlink_id')->index();
             $table->string('ip_address')->nullable();
@@ -60,7 +38,7 @@ class CreateShortlinksTables extends Migration
             
             $table->foreign('shortlink_id')
                 ->references('id')
-                ->on($this->tablePrefix.'shortlinks')
+                ->on($tablePrefix.'shortlinks')
                 ->onDelete('cascade');
         });
     }
@@ -72,7 +50,9 @@ class CreateShortlinksTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($this->tablePrefix.'shortlinks');
-        Schema::dropIfExists($this->tablePrefix.'tracking');
+        $tablePrefix = config('shortlinks.database_table_prefix');
+
+        Schema::dropIfExists($tablePrefix.'shortlinks');
+        Schema::dropIfExists($tablePrefix.'tracking');
     }
 }

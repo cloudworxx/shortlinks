@@ -2,6 +2,8 @@
 
 namespace RyanChandler\Shortlinks;
 
+use RyanChandler\Shortlinks\Models\Shortlink;
+
 class PendingShortlink
 {
     /**
@@ -10,6 +12,27 @@ class PendingShortlink
      * @var string
      */
     protected $url;
+
+    /**
+     * Whether clicks should be tracked.
+     * 
+     * @var bool
+     */
+    protected $trackClicks;
+
+    /**
+     * Whether the IP should be tracked.
+     * 
+     * @var bool
+     */
+    protected $trackIp;
+
+    /**
+     * Whether the user agent should be tracked.
+     * 
+     * @var bool
+     */
+    protected $trackAgent;
 
     /**
      * Create a new PendingShortlinkCreator instance.
@@ -23,12 +46,56 @@ class PendingShortlink
     }
 
     /**
-     * Handle the object's destruction.
-     *
-     * @return void
+     * Whether clicks should be tracked.
+     * 
+     * @param  bool  $track
+     * @return \RyanChandler\Shortlinks\PendingShortlink
      */
-    public function __destruct()
+    public function trackClicks(bool $track = true): PendingShortlink
     {
-        
+        $this->trackClicks = $track;
+
+        return $this;
+    }
+
+    /**
+     * Whether the IP should be tracked.
+     * 
+     * @param  bool  $track
+     * @return \RyanChandler\Shortlinks\PendingShortlink
+     */
+    public function trackIp(bool $track = true): PendingShortlink
+    {
+        $this->trackIp = $track;
+
+        return $this;
+    }
+
+    /**
+     * Whether the user agent should be tracked.
+     * 
+     * @param  bool  $track
+     * @return \RyanChandler\Shortlinks\PendingShortlink
+     */
+    public function trackAgent(bool $track = true): PendingShortlink
+    {
+        $this->trackAgent = $track;
+
+        return $this;
+    }
+
+    /**
+     * Generate the shortlink.
+     * 
+     * @return \RyanChandler\Shortlinks\Models\Shortlink
+     */
+    public function generate(): Shortlink
+    {
+        return Shortlink::create([
+            'destination' => $this->url,
+            'trackClicks' => $this->trackClicks,
+            'trackIp' => $this->trackIp,
+            'trackAgent' => $this->trackAgent,
+        ]);
     }
 }

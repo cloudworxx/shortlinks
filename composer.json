@@ -1,6 +1,6 @@
 {
     "name": "ryangjchandler/shortlinks",
-    "description": "Generate shortlinks for routes in your Laravel applications.",
+    "description": "Generate shortlinks for your Laravel routes or arbitrary URLs.",
     "type": "library",
     "license": "MIT",
     "authors": [

@@ -1,0 +1,47 @@
+{
+    "name": "ryangjchandler/shortlinks",
+    "description": "Generate shortlinks for routes in your Laravel applications.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ryan Chandler",
+            "email": "ryan@chandler.codes"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=7.2",
+        "illuminate/database": "^6.0",
+        "illuminate/support": "^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0",
+        "orchestra/testbench": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "RyanChandler\\Shortlinks\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RyanChandler\\Shortlinks\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RyanChandler\\Shortlinks\\ShortlinksServiceProvider"
+            ],
+            "aliases": {
+                "Shortlinks": "RyanChandler\\Shortlinks\\Facades\\Shortlinks"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist"
+    }
+}

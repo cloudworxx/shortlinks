@@ -2,7 +2,9 @@
 
 namespace RyanChandler\Shortlinks;
 
+use Illuminate\Foundation\Http\Kernel;
 use Illuminate\Support\ServiceProvider;
+use RyanChandler\Shortlinks\Http\Middleware\TrackShortlink;
 
 class ShortlinksServiceProvider extends ServiceProvider
 {

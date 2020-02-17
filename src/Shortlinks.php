@@ -32,8 +32,19 @@ class Shortlinks
      * @param  bool  $absolute
      * @return \RyanChandler\Shortlinks\PendingShortlinkCreator
      */
-    public function route(string $route, array $parameters = [], bool $absolute = true): PendingShortlinkCreator
+    public function route(string $route, array $parameters = [], bool $absolute = true): PendingShortlink
     {
-        return new PendingShortlinkCreator(route($route, $parameters, $absolute));
+        return $this->url(route($route, $parameters, $absolute));
+    }
+
+    /**
+     * Create a shortlink for a URL.
+     * 
+     * @param  string  $url
+     * @return \RyanChandler\Shortlinks\PendingShortlinkCreator
+     */
+    public function url(string $url): PendingShortlink
+    {
+        return new PendingShortlink($url);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace RyanChandler\Shortlinks;
 
-class PendingShortlinkCreator
+class PendingShortlink
 {
     /**
      * The URL that this shortlink represents.

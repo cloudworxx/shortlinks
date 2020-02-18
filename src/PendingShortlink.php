@@ -35,6 +35,13 @@ class PendingShortlink
     protected $trackAgent;
 
     /**
+     * The prefix of the shortlink.
+     * 
+     * @var bool
+     */
+    protected $prefix;
+
+    /**
      * Create a new PendingShortlinkCreator instance.
      * 
      * @param  string  $url
@@ -85,6 +92,19 @@ class PendingShortlink
     }
 
     /**
+     * Change the prefix for this shortlink.
+     * 
+     * @param  string  $prefix
+     * @return \RyanChandler\Shortlinks\PendingShortlink
+     */
+    public function withPrefix(string $prefix): PendingShortlink
+    {
+        $this->prefix = $prefix;
+
+        return $this;
+    }
+
+    /**
      * Generate the shortlink.
      * 
      * @return \RyanChandler\Shortlinks\Models\Shortlink
@@ -93,9 +113,10 @@ class PendingShortlink
     {
         return Shortlink::create([
             'destination' => $this->url,
-            'trackClicks' => $this->trackClicks,
-            'trackIp' => $this->trackIp,
-            'trackAgent' => $this->trackAgent,
+            'track_clicks' => $this->trackClicks,
+            'track_ip' => $this->trackIp,
+            'track_agent' => $this->trackAgent,
+            'prefix' => $this->prefix,
         ]);
     }
 }

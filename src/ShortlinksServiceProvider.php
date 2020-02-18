@@ -3,8 +3,10 @@
 namespace RyanChandler\Shortlinks;
 
 use Illuminate\Foundation\Http\Kernel;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use RyanChandler\Shortlinks\Http\Middleware\TrackShortlink;
+use RyanChandler\Shortlinks\Models\Shortlink;
 
 class ShortlinksServiceProvider extends ServiceProvider
 {
@@ -33,5 +35,9 @@ class ShortlinksServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/shortlinks.php', 'shortlinks');
 
         $this->app->singleton(Shortlinks::class, Shortlinks::class);
+
+        Route::bind('shortlink', function ($shortlink) {
+            return Shortlink::where('shortlink', $shortlink)->first();
+        });
     }
 }

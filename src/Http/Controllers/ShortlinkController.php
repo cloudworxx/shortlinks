@@ -27,6 +27,6 @@ class ShortlinkController
             $shortlink->tracking()->create($tracking);
         }
         
-        return redirect()->to($shortlink->destination);
+        return redirect()->to($shortlink->destination()->__toString());
     }
 }

@@ -14,11 +14,6 @@ trait HasUuid
         });
     }
 
-    public function incrementing()
-    {
-        return false;
-    }
-
     public function getKeyType()
     {
         return 'string';

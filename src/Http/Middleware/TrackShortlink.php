@@ -21,7 +21,7 @@ class TrackShortlink
      */
     public function __construct(Repository $config)
     {
-        $this->config = $config->get('shortlinks.tracking');
+        $this->config = $config->get('shortlinks');
     }
 
     /**
@@ -34,9 +34,9 @@ class TrackShortlink
     public function handle(Request $request, \Closure $next)
     {
         $request->merge([
-            'track_clicks' => $this->config['track_clicks'],
-            'track_ip' => $this->config['track_ip'],
-            'track_agent' => $this->config['track_agent'],
+            'track_clicks' => $this->config['tracking']['track_clicks'] || $this->config['tracking'] === true,
+            'track_ip' => $this->config['tracking']['track_ip'] || $this->config['tracking'] === true,
+            'track_agent' => $this->config['tracking']['track_agent'] || $this->config['tracking'] === true,
         ]);
 
         return $next($request);

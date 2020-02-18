@@ -240,4 +240,28 @@ class ShortlinkTest extends TestCase
             'agent' => 'Shortlinks PHPUnit Test Suite',
         ]);
     }
+
+    /** @test */
+    public function it_will_track_all_if_config_is_true()
+    {
+        config(['shortlinks.tracking' => true]);
+
+        $shortlink = Shortlinks::url('http://google.co.uk')->generate();
+
+        $this->get($shortlink->fullUrl(), [
+            'REMOTE_ADDR' => '127.1.1.1',
+            'User-Agent' => 'Shortlinks PHPUnit Test Suite',
+        ]);
+
+        $this->assertDatabaseHas($this->tableName('shortlinks'), [
+            'id' => $shortlink->id,
+            'clicks' => 1,
+        ]);
+
+        $this->assertDatabaseHas($this->tableName('tracking'), [
+            'shortlink_id' => $shortlink->id,
+            'ip_address' => '127.1.1.1',
+            'agent' => 'Shortlinks PHPUnit Test Suite',
+        ]);
+    }
 }

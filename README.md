@@ -46,6 +46,7 @@ use RyanChandler\Shortlinks\Facades\Shortlinks;
 Shortlinks::url('https://github.com')->generate();
 ```
 
+
 ### PendingShortlink
 
 Both of the methods above return an instance of `RyanChandler\Shortlinks\PendingShortlink`. This can be used to modify the tracking settings for an individual shortlink.

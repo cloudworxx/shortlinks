@@ -47,14 +47,4 @@ class Shortlinks
     {
         return new PendingShortlink($url);
     }
-
-    /**
-     * Get the string representation of the Shortlink.
-     * 
-     * @return string
-     */
-    public function __toString(): string
-    {
-        
-    }
 }

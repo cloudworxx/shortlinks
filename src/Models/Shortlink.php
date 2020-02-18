@@ -101,4 +101,14 @@ class Shortlink extends Model
     {
         return config('shortlinks.database_table_prefix').'shortlinks';
     }
+
+    /**
+     * Get the string representation of the Shortlink.
+     * 
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->fullUrl();
+    }
 }

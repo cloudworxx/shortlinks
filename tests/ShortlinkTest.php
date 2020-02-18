@@ -2,11 +2,14 @@
 
 namespace RyanChandler\Shortlinks\Tests;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use RyanChandler\Shortlinks\Facades\Shortlinks;
 use RyanChandler\Shortlinks\Models\Shortlink;
 
 class ShortlinkTest extends TestCase
 {
+    use RefreshDatabase;
+    
     /** @test */
     public function it_can_be_created_from_route()
     {
@@ -98,6 +101,36 @@ class ShortlinkTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_created_and_visited_with_click_tracking()
+    {
+        config(['shortlinks.tracking.track_clicks' => false]);
+
+        $shortlink = Shortlinks::url('http://google.co.uk')
+            ->trackClicks()
+            ->generate();
+
+        $this->assertDatabaseHas($this->tableName('shortlinks'), [
+            'destination' => 'http://google.co.uk',
+            'track_clicks' => true,
+            'clicks' => 0
+        ]);
+
+        $this->get($shortlink->fullUrl());
+
+        $this->assertDatabaseHas($this->tableName('shortlinks'), [
+            'id' => $shortlink->id,
+            'clicks' => 1,
+        ]);
+
+        $this->get($shortlink->fullUrl());
+
+        $this->assertDatabaseHas($this->tableName('shortlinks'), [
+            'id' => $shortlink->id,
+            'clicks' => 2,
+        ]);
+    }
+
+    /** @test */
     public function it_can_be_created_and_visited_with_ip_tracking()
     {
         $shortlink = Shortlinks::url('http://google.co.uk')
@@ -138,6 +171,39 @@ class ShortlinkTest extends TestCase
         $this->assertDatabaseHas($this->tableName('tracking'), [
             'shortlink_id' => $shortlink->id,
             'agent' => 'Shortlinks PHPUnit Test Suite',
+        ]);
+    }
+
+    /** @test */
+    public function it_can_be_deleted_and_will_delete_all_tracking_data()
+    {
+        $shortlink = Shortlinks::url('http://google.co.uk')
+            ->trackAgent()
+            ->generate();
+
+        $this->assertDatabaseHas($this->tableName('shortlinks'), [
+            'destination' => 'http://google.co.uk',
+            'track_agent' => true,
+        ]);
+
+        $this->get($shortlink->fullUrl(), [
+            'User-Agent' => 'Shortlinks PHPUnit Test Suite',
+        ]);
+
+        $this->assertDatabaseHas($this->tableName('tracking'), [
+            'shortlink_id' => $shortlinkId = $shortlink->id,
+            'agent' => 'Shortlinks PHPUnit Test Suite',
+        ]);
+
+        $shortlink->delete();
+
+        $this->assertDatabaseMissing($this->tableName('shortlinks'), [
+            'destination' => 'http://google.co.uk',
+            'track_agent' => true,
+        ]);
+
+        $this->assertDatabaseMissing($this->tableName('tracking'), [
+            'shortlink_id' => $shortlinkId,
         ]);
     }
 }

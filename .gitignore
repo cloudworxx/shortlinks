@@ -2,5 +2,6 @@
 /build
 /docs
 /coverage
+.env.testing
 composer.lock
 .phpunit.result.cache

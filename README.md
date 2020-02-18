@@ -105,7 +105,7 @@ If you discover any security related issues, please email ryan@chandler.codes in
 
 ## Credits
 
-- [Ryan Chandler](https://github.com/ryangjchadler)
+- [Ryan Chandler](https://github.com/ryangjchandler)
 - [All Contributors](../../contributors)
 
 ## License

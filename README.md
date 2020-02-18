@@ -6,7 +6,7 @@
 
 This package can be used to generate short links for your Laravel routes or arbitrary URLs. It's best used when sharing links from your site, such as blog posts or promotion links.
 
-This package also provides some very basic tracking, including click, IP and user agent tracking.
+This package also provides some very basic tracking, including click, IP and user agent tracking. 
 
 ## Installation
 
@@ -18,10 +18,53 @@ composer require ryangjchandler/shortlinks
 
 ## Usage
 
-``` php
-$skeleton = new BeyondCode\Skeleton();
-echo $skeleton->echoPhrase('Hello, BeyondCode!');
+If you wish to modify the configuration file, you need to publish the service provider:
+
+```bash
+php artisan vendor:publish --provider="RyanChandler\Shortlinks\ShortlinksServiceProvider" --tag=config
 ```
+
+### Generating shortlinks
+
+There are two ways to generate a shortlink, using either a route or arbitrary URL.
+
+### Route
+
+```php
+use RyanChandler\Shortlinks\Facades\Shortlinks;
+
+Shortlinks::route('route', ['params' => true])->generate();
+```
+
+This method has the same signature as Laravel's `route()` helper function.
+
+### URL
+
+```php
+use RyanChandler\Shortlinks\Facades\Shortlinks;
+
+Shortlinks::url('https://github.com')->generate();
+```
+
+### Configuring tracking
+
+Inside of the configuration file, you'll find a `tracking` key. Use this to modify which information gets tracked.
+
+To track all information, including clicks, IP and user agent, you can set the `tracking` to `true`:
+
+```php
+<?php
+
+return [
+
+    ...
+
+    'tracking' => true,
+
+];
+```
+
+You can also individually enable each tracking feature.
 
 ### Testing
 

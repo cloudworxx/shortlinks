@@ -6,7 +6,7 @@
 
 This package can be used to generate short links for your Laravel routes or arbitrary URLs. It's best used when sharing links from your site, such as blog posts or promotion links.
 
-This package also provides some very basic tracking, including click, IP and user agent tracking.
+This package also provides some very basic tracking, including click, IP and user agent tracking. 
 
 ## Installation
 

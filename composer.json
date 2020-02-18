@@ -6,7 +6,9 @@
     "authors": [
         {
             "name": "Ryan Chandler",
-            "email": "ryan@chandler.codes"
+            "email": "ryan@chandler.codes",
+            "homepage": "https://chandler.codes",
+            "role": "Developer"
         }
     ],
     "minimum-stability": "dev",

@@ -46,6 +46,25 @@ use RyanChandler\Shortlinks\Facades\Shortlinks;
 Shortlinks::url('https://github.com')->generate();
 ```
 
+### PendingShortlink
+
+Both of the methods above return an instance of `RyanChandler\Shortlinks\PendingShortlink`. This can be used to modify the tracking settings for an individual shortlink.
+
+```php
+use RyanChandler\Shortlinks\Facades\Shortlinks;
+
+// will track clicks for this individual shortlink
+Shortlinks::url('https://github.com')->trackClicks()->generate();
+
+// will track IP for this individual shortlink
+Shortlinks::url('https://github.com')->trackIp()->generate();
+
+// will track user agent for this individual shortlink
+Shortlinks::url('https://github.com')->trackAgent()->generate();
+```
+
+This is especially useful if you want to have no tracking by default and only enable for particular links.
+
 ### Configuring tracking
 
 Inside of the configuration file, you'll find a `tracking` key. Use this to modify which information gets tracked.

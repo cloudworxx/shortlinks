@@ -23,6 +23,10 @@ class ShortlinksServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
+        Route::bind('shortlink', function ($shortlink) {
+            return Shortlink::where('shortlink', $shortlink)->first();
+        });
     }
 
     /**
@@ -35,9 +39,5 @@ class ShortlinksServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/shortlinks.php', 'shortlinks');
 
         $this->app->singleton(Shortlinks::class, Shortlinks::class);
-
-        Route::bind('shortlink', function ($shortlink) {
-            return Shortlink::where('shortlink', $shortlink)->first();
-        });
     }
 }

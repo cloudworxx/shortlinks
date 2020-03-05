@@ -6,8 +6,8 @@
     "authors": [
         {
             "name": "Ryan Chandler",
-            "email": "ryan@chandler.codes",
-            "homepage": "https://chandler.codes",
+            "email": "support@ryangjchandler.co.uk",
+            "homepage": "https://ryangjchandler.co.uk",
             "role": "Developer"
         }
     ],
@@ -15,13 +15,13 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.2",
-        "illuminate/database": "^6.0",
-        "illuminate/support": "^6.0"
+        "illuminate/database": "^6.0|^7.0",
+        "illuminate/support": "^6.0|^7.0"
     },
     "require-dev": {
         "nunomaduro/phpinsights": "^1.13",
-        "orchestra/testbench": "^4.0",
-        "phpunit/phpunit": "^8.0"
+        "orchestra/testbench": "^4.0|^5.0",
+        "phpunit/phpunit": "^8.0|^9.0"
     },
     "autoload": {
         "psr-4": {

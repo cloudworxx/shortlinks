@@ -9,7 +9,7 @@ use RyanChandler\Shortlinks\Models\Shortlink;
 class ShortlinkTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     /** @test */
     public function it_can_be_created_from_route()
     {

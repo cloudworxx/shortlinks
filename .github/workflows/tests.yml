@@ -7,19 +7,19 @@ jobs:
     phpunit:
         runs-on: ubuntu-latest
 
-    strategy:
-        matrix:
-            php: [7.4, 7.3, 7.2]
+        strategy:
+            matrix:
+                php: [7.4, 7.3, 7.2]
 
-    name: PHP ${{ matrix.php }}
+        name: PHP ${{ matrix.php }}
 
-    steps:
-        - uses: actions/checkout@v1
-        with:
-        fetch-depth: 1
+        steps:
+            - uses: actions/checkout@v1
+              with:
+                fetch-depth: 1
 
-        - name: Install Composer dependencies
-        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+            - name: Install Composer dependencies
+              run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
-        - name: Run test suite
-        run: composer test
+            - name: Run test suite
+              run: composer test

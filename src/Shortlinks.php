@@ -8,14 +8,14 @@ class Shortlinks
 {
     /**
      * The shortlinks configurations.
-     * 
+     *
      * @var array
      */
     protected $config;
-    
+
     /**
      * Create a new Shortlinks instance.
-     * 
+     *
      * @param  \Illuminate\Config\Repository  $config
      * @return void
      */
@@ -26,7 +26,7 @@ class Shortlinks
 
     /**
      * Create a shortlink for a route.
-     * 
+     *
      * @param  string  $route
      * @param  array  $parameters
      * @param  bool  $absolute
@@ -39,7 +39,7 @@ class Shortlinks
 
     /**
      * Create a shortlink for a URL.
-     * 
+     *
      * @param  string  $url
      * @return \RyanChandler\Shortlinks\PendingShortlinkCreator
      */
